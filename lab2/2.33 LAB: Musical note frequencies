@@ -1,0 +1,20 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+   double f0, r;
+
+   cin >> f0;
+
+   r = pow(2, 1.0/12);
+
+   cout << fixed << setprecision(2) << f0 << " Hz" << endl;
+   cout << fixed << setprecision(2) << f0 * r << " Hz" << endl;
+   cout << fixed << setprecision(2) << f0 * pow(r, 2) << " Hz" << endl;
+   cout << fixed << setprecision(2) << f0 * pow(r, 3) << " Hz" << endl;
+
+   return 0;
+}
