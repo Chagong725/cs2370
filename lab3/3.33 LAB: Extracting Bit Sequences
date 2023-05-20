@@ -1,0 +1,27 @@
+#include <bitset>
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Enter the integer that holds the bits: "<<endl;
+    unsigned int n;
+    cin >> n;
+
+    cout << "Enter the rightmost bit position: "<<endl;
+    unsigned int k;
+    cin >> k;
+
+    cout << "Enter the leftmost bit position: "<<endl;
+    unsigned int m;
+    cin >> m;
+
+    // Extract the desired bits
+    unsigned int mask = (1u << (m - k + 1)) - 1;  // Create a mask with 1s for the desired bits
+    unsigned int extractedBits = (n >> k) & mask;  // Shift and apply the mask
+
+    // Display the extracted bits
+    cout << "Extracting bits " << k << " through " << m << " from " << n << " = " << bitset<32>(n) << ":" << endl;
+    cout << "Result = "<<extractedBits << " = " << bitset<32>(extractedBits) << endl;
+
+    return 0;
+}
