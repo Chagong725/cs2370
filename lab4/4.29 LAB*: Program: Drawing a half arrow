@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+   int arrowBaseHeight;
+   int arrowBaseWidth;
+   int arrowHeadWidth;
+
+   cin >> arrowBaseHeight;
+
+   cin >> arrowBaseWidth;
+
+   cin >> arrowHeadWidth;
+
+   while (arrowHeadWidth <= arrowBaseWidth) {
+      cin >> arrowHeadWidth;
+   }
+
+   // Step 1: Draw the arrow base (rectangle)
+   for (int i = 0; i < arrowBaseHeight; i++) {
+      for (int j = 0; j < arrowBaseWidth; j++) {
+         cout << "*";
+      }
+      cout << endl;
+   }
+
+   // Step 2: Draw the arrow head (right triangle)
+   for (int i = arrowHeadWidth; i > 0; i--) {
+      for (int j = i; j > 0; j--) {
+         cout << "*";
+      }
+      cout << endl;
+   }
+
+   return 0;
+}
