@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+
+int main() {
+    string input;
+
+    getline(cin, input);
+
+    // Remove spaces from the input
+    string processedInput;
+    for (char c : input) {
+        if (!isspace(c)) {
+            processedInput += tolower(c);
+        }
+    }
+
+    // Check if the processed input is a palindrome
+    bool isPalindrome = true;
+    int length = processedInput.length();
+    for (int i = 0; i < length / 2; i++) {
+        if (processedInput[i] != processedInput[length - 1 - i]) {
+            isPalindrome = false;
+            break;
+        }
+    }
+
+    // Display the result
+    if (isPalindrome) {
+        cout << "palindrome: " << input << endl;
+    } else {
+        cout << "not a palindrome: " << input << endl;
+    }
+
+    return 0;
+}
