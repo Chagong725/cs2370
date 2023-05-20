@@ -1,0 +1,34 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+   double height, width, costPerCan, area, paintNeeded;
+   int cansNeeded;
+   const double sqFeetPerGallon = 350.0;
+   const double salesTaxRate = 0.07;
+
+   cin >> height >> width >> costPerCan;
+
+   area = height * width;
+   cout << fixed << setprecision(1) << "Wall area: " << area << " sq ft" << endl;
+
+   paintNeeded = area / sqFeetPerGallon;
+   cout << fixed << setprecision(3) << "Paint needed: " << paintNeeded << " gallons" << endl;
+
+   cansNeeded = ceil(paintNeeded);
+   cout << "Cans needed: " << cansNeeded << " can(s)" << endl;
+
+   double paintCost = costPerCan * cansNeeded;
+   cout << fixed << setprecision(2) << "Paint cost: $" << paintCost << endl;
+
+   double salesTax = salesTaxRate * paintCost;
+   cout << fixed << setprecision(2) << "Sales tax: $" << salesTax << endl;
+
+   double totalCost = paintCost + salesTax;
+   cout << fixed << setprecision(2) << "Total cost: $" << totalCost << endl;
+
+   return 0;
+}
