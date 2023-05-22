@@ -1,0 +1,112 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int GetNumOfNonWSCharacters(const string& str) {
+    int count = 0;
+    for (char c : str) {
+        if (!isspace(c)) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int GetNumOfWords(const string& str) {
+    int count = 0;
+    bool inWord = false;
+    for (char c : str) {
+        if (isspace(c)) {
+            inWord = false;
+        } else {
+            if (!inWord) {
+                count++;
+                inWord = true;
+            }
+        }
+    }
+    return count;
+}
+
+int FindText(const string& wordToFind, const string& str) {
+    int count = 0;
+    string::size_type pos = 0;
+    while ((pos = str.find(wordToFind, pos)) != string::npos) {
+        count++;
+        pos += wordToFind.length();
+    }
+    return count;
+}
+
+void ReplaceExclamation(string& str) {
+    replace(str.begin(), str.end(), '!', '.');
+}
+
+void ShortenSpace(string& str) {
+    string::iterator newEnd = unique(str.begin(), str.end(), [](char a, char b) {
+        return isspace(a) && isspace(b);
+    });
+    str.erase(newEnd, str.end());
+}
+
+void ExecuteMenu(char input, string& text) {
+    switch (input) {
+        case 'c':
+            cout << "Number of non-whitespace characters: " << GetNumOfNonWSCharacters(text) << endl<<endl;
+            break;
+        case 'w':
+            cout << "Number of words: " << GetNumOfWords(text) << endl<<endl;
+            break;
+        case 'f':
+            cout << "Enter a word or phrase to be found:" << endl;
+            cin.ignore();
+            {
+                string word;
+                getline(cin, word);
+                cout << "\"" << word << "\" instances: " << FindText(word, text) << endl<<endl;
+            }
+            break;
+        case 'r':
+            ReplaceExclamation(text);
+            cout << "Edited text: " << text << endl<<endl;
+            break;
+        case 's':
+            ShortenSpace(text);
+            cout << "Edited text: " << text << endl<<endl;
+            break;
+        case 'q':
+            break;
+        default:
+            cout << "Please enter a valid letter" << endl;
+            break;
+    }
+}
+
+void PrintMenu() {
+    cout << "MENU" << endl;
+    cout << "c - Number of non-whitespace characters" << endl;
+    cout << "w - Number of words" << endl;
+    cout << "f - Find text" << endl;
+    cout << "r - Replace all !'s" << endl;
+    cout << "s - Shorten spaces" << endl;
+    cout << "q - Quit" << endl<<endl;
+}
+
+int main() {
+    string text;
+
+    cout << "Enter a sample text:" << endl<<endl;
+    getline(cin, text);
+    cout << "You entered: " << text << endl<<endl;
+
+    char choice;
+    do {
+        PrintMenu();
+        cout << "Choose an option:" << endl;
+        cin >> choice;
+        ExecuteMenu(choice, text);
+    } while (choice != 'q');
+
+    return 0;
+}
